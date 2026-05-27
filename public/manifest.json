@@ -1,6 +1,6 @@
 {
-  "name": "Quibla — Direction to Makkah",
-  "short_name": "Quibla",
+  "name": "Qibla — Direction to Makkah",
+  "short_name": "Qibla",
   "description": "Find the Qibla direction from anywhere in the world using your phone's compass.",
   "start_url": "/",
   "display": "standalone",
