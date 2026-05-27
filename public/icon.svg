@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="#0b1622"/>
+
+  <!-- Outer gold ring -->
+  <circle cx="256" cy="256" r="220" fill="none" stroke="#f0c040" stroke-width="4" opacity="0.35"/>
+  <circle cx="256" cy="256" r="208" fill="none" stroke="#27ae60" stroke-width="2" opacity="0.2"/>
+
+  <!-- ── Mosque silhouette ── -->
+  <!-- Left minaret -->
+  <rect x="112" y="195" width="22" height="110" rx="4" fill="#f0c040" opacity="0.9"/>
+  <ellipse cx="123" cy="193" rx="13" ry="18" fill="#f0c040"/>
+  <line x1="123" y1="172" x2="123" y2="162" stroke="#f0c040" stroke-width="3"/>
+  <circle cx="123" cy="160" r="4" fill="#f0c040"/>
+
+  <!-- Right minaret -->
+  <rect x="378" y="195" width="22" height="110" rx="4" fill="#f0c040" opacity="0.9"/>
+  <ellipse cx="389" cy="193" rx="13" ry="18" fill="#f0c040"/>
+  <line x1="389" y1="172" x2="389" y2="162" stroke="#f0c040" stroke-width="3"/>
+  <circle cx="389" cy="160" r="4" fill="#f0c040"/>
+
+  <!-- Main dome -->
+  <path d="M156 240 Q156 155 256 145 Q356 155 356 240Z" fill="#27ae60"/>
+  <!-- Dome inner highlight -->
+  <path d="M180 240 Q180 175 256 168 Q332 175 332 240Z" fill="#2ecc71" opacity="0.35"/>
+
+  <!-- Crescent on dome -->
+  <path d="M256 130
+    a22 22 0 1 1 18 11
+    a14 14 0 1 0 -18 -11Z"
+    fill="#f0c040"/>
+
+  <!-- Mosque body -->
+  <rect x="156" y="240" width="200" height="110" rx="6" fill="#1a7a40"/>
+
+  <!-- Body highlight -->
+  <rect x="156" y="240" width="200" height="20" rx="0" fill="#27ae60" opacity="0.4"/>
+
+  <!-- Arched door -->
+  <path d="M224 350 L224 295 Q256 272 288 295 L288 350Z" fill="#0b1622" opacity="0.75"/>
+
+  <!-- Windows -->
+  <ellipse cx="196" cy="275" rx="12" ry="15" fill="#f0c040" opacity="0.45"/>
+  <ellipse cx="316" cy="275" rx="12" ry="15" fill="#f0c040" opacity="0.45"/>
+
+  <!-- ── Compass needle ── (points toward Qibla) -->
+  <!-- Green / north half -->
+  <polygon points="256,365 246,420 256,408 266,420" fill="#2ecc71"
+    filter="url(#g)"/>
+  <!-- Red / south half -->
+  <polygon points="256,430 246,420 256,408 266,420" fill="#e74c3c" opacity="0.8"/>
+  <!-- Center jewel -->
+  <circle cx="256" cy="415" r="7" fill="#f0c040"/>
+
+  <!-- App wordmark -->
+  <text x="256" y="490"
+    text-anchor="middle"
+    fill="#f0c040"
+    font-size="34"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-weight="bold"
+    letter-spacing="10"
+    opacity="0.9">QUIBLA</text>
+
+  <!-- Glow filter -->
+  <defs>
+    <filter id="g" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+</svg>

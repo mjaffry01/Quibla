@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Quibla — Direction to Makkah</title>
 
+  <!-- ── PWA ─────────────────────────────────────── -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0b1622" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Quibla" />
+  <link rel="apple-touch-icon" href="/icon.svg" />
+
+  <!-- SEO / share -->
+  <meta name="description" content="Find the Qibla direction to Makkah Al-Mukarramah from anywhere in the world." />
+
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Bootstrap Icons -->
@@ -667,6 +679,77 @@ function toCardinal(deg) {
                 'S','SSW','SW','WSW','W','WNW','NW','NNW']
   return dirs[Math.round(((deg % 360) + 360) % 360 / 22.5) % 16]
 }
+</script>
+
+<!-- ── PWA: Install banner + Service Worker ──────────── -->
+<div id="installBanner" style="
+  display:none;
+  position:fixed; bottom:0; left:0; right:0;
+  background: linear-gradient(135deg,#132035 0%,#0b1e35 100%);
+  border-top: 1px solid rgba(240,192,64,.3);
+  padding: 12px 16px 20px;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  gap: 12px;
+">
+  <img src="/icon.svg" width="44" height="44" style="border-radius:10px;flex-shrink:0" />
+  <div style="flex:1;min-width:0">
+    <div style="font-weight:700;font-size:.9rem;color:#f0c040">Install Quibla</div>
+    <div style="font-size:.75rem;color:#6b8aad;margin-top:2px">Add to Home Screen for offline use</div>
+  </div>
+  <button id="btnInstall" style="
+    background:linear-gradient(135deg,#27ae60,#2ecc71);
+    border:none; color:#fff; font-weight:700;
+    font-size:.82rem; padding:8px 18px;
+    border-radius:50px; cursor:pointer;
+    box-shadow:0 3px 12px rgba(39,174,96,.35);
+    white-space:nowrap;
+  ">Install</button>
+  <button id="btnDismiss" style="
+    background:none; border:none;
+    color:rgba(255,255,255,.35); font-size:1.2rem;
+    cursor:pointer; padding:4px 8px; line-height:1;
+  ">✕</button>
+</div>
+
+<script>
+// ── Service Worker registration ───────────────────────
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('SW registered', reg.scope))
+      .catch(err => console.warn('SW error', err))
+  })
+}
+
+// ── Install prompt (Android / desktop Chrome) ─────────
+let deferredInstallPrompt = null
+
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault()
+  deferredInstallPrompt = e
+  document.getElementById('installBanner').style.display = 'flex'
+})
+
+document.getElementById('btnInstall').addEventListener('click', () => {
+  if (!deferredInstallPrompt) return
+  deferredInstallPrompt.prompt()
+  deferredInstallPrompt.userChoice.then(choice => {
+    deferredInstallPrompt = null
+    document.getElementById('installBanner').style.display = 'none'
+  })
+})
+
+document.getElementById('btnDismiss').addEventListener('click', () => {
+  document.getElementById('installBanner').style.display = 'none'
+})
+
+// Hide banner once installed
+window.addEventListener('appinstalled', () => {
+  document.getElementById('installBanner').style.display = 'none'
+  deferredInstallPrompt = null
+})
 </script>
 </body>
 </html>
