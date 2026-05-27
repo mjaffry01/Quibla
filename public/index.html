@@ -563,7 +563,7 @@ if (!navigator.geolocation) {
 // ═══════════════════════════════════════════════════════
 async function fetchQibla(lat, lng) {
   try {
-    const res  = await fetch(`/api/qibla/${lat}/${lng}`)
+    const res  = await fetch(`https://api.aladhan.com/v1/qibla/${lat}/${lng}`)
     const json = await res.json()
     qiblaDir   = parseFloat(json.data.direction)
 
